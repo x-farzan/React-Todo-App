@@ -1,0 +1,45 @@
+.todoForm {
+  position: absolute;
+  margin-top: 3%;
+  margin-left: 35%;
+}
+
+.input {
+  padding: 5px;
+  border-radius: 5px;
+  border-color: rgb(255, 0, 255);
+  width: 150%;
+}
+
+.input:focus {
+  border-color: #a347ff;
+  padding: 5px;
+  border-radius: 5px;
+  width: 150%;
+  outline: none;
+}
+
+.button {
+  padding: 1%;
+  border-radius: 5px;
+  border-color: rgb(255, 0, 255);
+  margin-top: 3%;
+  margin-left: 65%;
+  background-color: #a347ff;
+  text-align: center;
+}
+
+.button:active {
+  padding: 1%;
+  border-radius: 5px;
+  border-color: #a347ff;
+  margin-top: 3%;
+  margin-left: 65%;
+  background-color: #a347ff;
+  text-align: center;
+}
+
+.p {
+  color: white;
+  font-weight: 600;
+}

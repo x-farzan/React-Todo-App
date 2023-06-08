@@ -1,0 +1,13 @@
+.todoNav {
+  background-color: #a347ff;
+  position: relative;
+  margin: 5% 35% 0% 35%;
+  padding: 1px;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.p {
+    color: white;
+    font-weight: 900;
+}
