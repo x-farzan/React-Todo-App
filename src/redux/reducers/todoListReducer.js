@@ -1,4 +1,4 @@
-import { PUSH } from "../actions/types";
+import { PUSH, DELETE } from "../actions/types";
 
 const initialState = {
   todoList: [],
@@ -10,6 +10,17 @@ const todoListReducer = (state = initialState, action) => {
       return {
         ...state,
         todoList: [...state.todoList, action.payload],
+      };
+    case DELETE:
+      state.todoList = state.todoList.filter((todo) => {
+        console.log(`todo ----- `, todo);
+        console.log(`action.payload ----- `, action.payload);
+        return todo !== action.payload;
+      });
+      console.log(`checking ----- `, state.todoList);
+      return {
+        ...state,
+        todoList: state.todoList,
       };
     default:
       return {
