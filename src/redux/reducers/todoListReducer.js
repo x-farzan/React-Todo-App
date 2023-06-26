@@ -12,15 +12,15 @@ const todoListReducer = (state = initialState, action) => {
         todoList: [...state.todoList, action.payload],
       };
     case DELETE:
-      state.todoList = state.todoList.filter((todo) => {
+      const filteredList = state.todoList.filter((todo) => {
         console.log(`todo ----- `, todo);
         console.log(`action.payload ----- `, action.payload);
-        return todo !== action.payload;
+        return todo.todo !== action.payload;
       });
       console.log(`checking ----- `, state.todoList);
       return {
         ...state,
-        todoList: state.todoList,
+        todoList: filteredList,
       };
     default:
       return {

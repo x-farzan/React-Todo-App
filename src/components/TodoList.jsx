@@ -8,16 +8,16 @@ import classes from "./TodoList.module.css";
 const TodoList = () => {
   const { todoListReducer } = useSelector((state) => state);
   const { todoList } = todoListReducer;
-  const [todo, setTodo] = useState();
+  // const [todo, setTodo] = useState();
   const dispatch = new useDispatch();
 
-  const handleDelete = () => {
-    dispatch({ type: DELETE, payload: { todo } });
+  const handleDelete = (item) => {
+    dispatch({ type: DELETE, payload: item });
   };
 
   const deleteTodo = (item) => {
-    setTodo(item);
-    handleDelete();
+    // setTodo(item);
+    handleDelete(item);
   };
 
   return (
@@ -27,7 +27,6 @@ const TodoList = () => {
           <Card key={index} item={item.todo} />
           <div className={classes.editIcon}>
             <button
-              type="button"
               onClick={() => {
                 console.log(`pressed ------ `, item.todo);
                 deleteTodo(item.todo);
