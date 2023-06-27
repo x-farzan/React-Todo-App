@@ -8,7 +8,8 @@ import classes from "./TodoList.module.css";
 const TodoList = () => {
   const { todoListReducer } = useSelector((state) => state);
   const { todoList } = todoListReducer;
-  // const [todo, setTodo] = useState();
+  const [editTodo, setEditTodo] = useState(false);
+  const [todoPayload, setTodoPayload] = useState();
   const dispatch = new useDispatch();
 
   const handleDelete = (item) => {
@@ -23,18 +24,47 @@ const TodoList = () => {
   return (
     <div className={classes.div1}>
       {todoList.map((item, index) => (
-        <div className={classes.div2}>
-          <Card key={index} item={item.todo} />
-          <div className={classes.editIcon}>
-            <button
-              onClick={() => {
-                console.log(`pressed ------ `, item.todo);
-                deleteTodo(item.todo);
-              }}
-            >
-              DELETE
-            </button>
-          </div>
+        <div className={classes.div2} key={index}>
+          {editTodo && todoPayload === item.todo ? (
+            <input />
+          ) : (
+            <Card item={item.todo} />
+          )}
+          {editTodo && todoPayload === item.todo ? (
+            <div className={classes.editIcon}>
+              <button
+                onClick={() => {
+                  console.log(`pressed ------ `, item.todo);
+                  deleteTodo(item.todo);
+                }}
+              >
+                UPDATE
+              </button>
+            </div>
+          ) : (
+            <div>
+              <div className={classes.editIcon}>
+                <button
+                  onClick={() => {
+                    console.log(`pressed ------ `, item.todo);
+                    deleteTodo(item.todo);
+                  }}
+                >
+                  DELETE
+                </button>
+              </div>
+              <div className={classes.editIcon}>
+                <button
+                  onClick={() => {
+                    setEditTodo(true);
+                    setTodoPayload(item.todo);
+                  }}
+                >
+                  EDIT
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       ))}
     </div>
