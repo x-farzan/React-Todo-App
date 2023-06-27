@@ -21,12 +21,21 @@ const TodoList = () => {
     handleDelete(item);
   };
 
+  const handleUpdate = (item) => {
+    dispatch({ type: DELETE, payload: item });
+  };
+
+  const updateTodo = (item) => {
+    // setTodo(item);
+    handleUpdate(item);
+  };
+
   return (
     <div className={classes.div1}>
       {todoList.map((item, index) => (
         <div className={classes.div2} key={index}>
           {editTodo && todoPayload === item.todo ? (
-            <input />
+            <input value={item.todo}/>
           ) : (
             <Card item={item.todo} />
           )}
