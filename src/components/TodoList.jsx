@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { DELETE } from "../redux/actions/types";
+import { DELETE, EDIT } from "../redux/actions/types";
 import Card from "./Card";
 import classes from "./TodoList.module.css";
 
@@ -10,6 +10,7 @@ const TodoList = () => {
   const { todoList } = todoListReducer;
   const [editTodo, setEditTodo] = useState(false);
   const [todoPayload, setTodoPayload] = useState();
+  const [onChangeTodo, setOnChangeTodo] = useState("");
   const dispatch = new useDispatch();
 
   const handleDelete = (item) => {
@@ -21,13 +22,18 @@ const TodoList = () => {
     handleDelete(item);
   };
 
-  const handleUpdate = (item) => {
-    dispatch({ type: DELETE, payload: item });
+  const handleUpdate = (item, index) => {
+    console.log(`item ------ `, item);
+    dispatch({ type: EDIT, payload: { item, index } });
   };
 
-  const updateTodo = (item) => {
+  const updateTodo = (item, index) => {
     // setTodo(item);
-    handleUpdate(item);
+    handleUpdate(item, index);
+  };
+
+  const onChange = (e) => {
+    setOnChangeTodo(e.target.value);
   };
 
   return (
@@ -35,7 +41,7 @@ const TodoList = () => {
       {todoList.map((item, index) => (
         <div className={classes.div2} key={index}>
           {editTodo && todoPayload === item.todo ? (
-            <input value={item.todo}/>
+            <input type="text" placeholder={item.todo} onChange={onChange} />
           ) : (
             <Card item={item.todo} />
           )}
@@ -43,8 +49,8 @@ const TodoList = () => {
             <div className={classes.editIcon}>
               <button
                 onClick={() => {
-                  console.log(`pressed ------ `, item.todo);
-                  deleteTodo(item.todo);
+                  console.log(`onChangeTodo ----`, onChangeTodo);
+                  updateTodo(onChangeTodo, index);
                 }}
               >
                 UPDATE
@@ -55,7 +61,6 @@ const TodoList = () => {
               <div className={classes.editIcon}>
                 <button
                   onClick={() => {
-                    console.log(`pressed ------ `, item.todo);
                     deleteTodo(item.todo);
                   }}
                 >
